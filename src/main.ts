@@ -55,14 +55,14 @@ baseArray.push(1);
 let baseObject = {};
 
 interface Teacher {
-name: string;    //se mettessi name? vorrebbe dire che non è necessario avere name
+name?: string;    //se mettessi name? vorrebbe dire che non è necessario avere name
 yob: number;
 isFemale: boolean;
 studentNames: string[];
 }
 
 let andrea: Teacher = {   // deve avere le stesse proprietà dichiarate nella interfaccia
-  name: "Andrea",
+  //name: "Andrea",
   yob: 1978,
   isFemale: false,
   studentNames: ['Jordy', 'Evelin', 'Salma']
@@ -91,20 +91,23 @@ class Student {
     this.age = age;
     this.isFemale = isFemale;  //non è necessario che il constructor abbia tutte le proprietà
   }
+
+calculateMean (): number{
+      if(this.marks.length === 0){
+      return -1;
+    }
+    let sum = 0;
+
+    for (const mark of this.marks) {
+      sum += mark;
+    }
+
+    let mean = sum / this.marks.length;
+
+    return mean;
+}
 }
 
-calculateMean(): Number{
-  if (this.marks.length === 0) {
-    return - 1;
-  }
-
-let sum = 0;
-
-for (let mark of this.marks){
-  sum += mark;
-}
-return sum / this.marks.length;
-}
 
 let jordy = new Student('Jordy', 30, false);
 
@@ -119,10 +122,14 @@ console.log(jordy.calculateMean());
 const salma = {name: 'salma', isFemale: true, hobby: 'disegno'};  //non c'è problema se hobby non è nella interfaccia Teacher
 
 //se io do un tipo deve avere solo le proprietà di quel tipo
-const salma: Teacher = Object.freeze({   //object.freeze rende l'oggetto immutabile
+const salma2: Teacher = Object.freeze({   //object.freeze rende l'oggetto immutabile
   name: 'selma',
   isFemale: true,
   yob: 2002,
   studentNames: ['leonardo']
 });
 
+
+salma.isFemale = false;
+
+salma2.yob = 1902;
